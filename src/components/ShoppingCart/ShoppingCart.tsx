@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import OrderContext from "../../context/OrderContext";
-import { ButtonCheckoutElement, ContainerButtonCheckout, ItemShoppingCart, ShoppingCartElement, TotalValeuCart } from "./ShoppingCart.style";
+import { ButtonCheckoutElement, ContainerButtonCheckout, ItemShoppingCart, ShoppingCartElement, TotalValeuCart, CloseButton } from "./ShoppingCart.style";
 import { priceFormat } from "../../helpers/priceFormat";
 import { ButtonDeleteItem } from "../Button/Button";
 
@@ -28,6 +28,7 @@ export const ShoppingCart = ({ isOpen, onClose }: ShoppingCartProps) => {
 
   return (
     <ShoppingCartElement open={isOpen}>
+      <CloseButton onClick={onClose}>Fechar</CloseButton>
       <h1>Carrinho de compras</h1>
       <div>
         {appettizerOrder.map((appettizer, index) => (

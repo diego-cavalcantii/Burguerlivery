@@ -1,5 +1,8 @@
 import { styled } from "styled-components";
 import { colors } from "../../styles/colors";
+import { lighten } from "polished";
+
+
 
 export const ShoppingCartElement = styled.div`
   position: fixed;
@@ -13,6 +16,7 @@ export const ShoppingCartElement = styled.div`
   transition: transform 0.2s ease-out;
   display: flex;
   flex-direction: column;
+  gap: 5px;
 
   ${(props) =>
     props.open === true &&
@@ -70,5 +74,21 @@ export const TotalValeuCart = styled.div`
   & > p {
     font-weight: 900;
     font-size: 1.08rem;
+  }
+`
+
+export const CloseButton = styled.button`
+  border: none;
+  background-color: ${colors.primary.main};
+  color: ${colors.text.title};
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  align-self: end;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${lighten(0.2, colors.primary.main)};
   }
 `

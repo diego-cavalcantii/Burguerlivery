@@ -58,7 +58,7 @@ export default function Checkout() {
 
   const FinalizarCompra = () => {
     const products = generateProducts;
-    setOrderLog([products, "Total " + priceFormat(order.totalValue), order.paymantMethod])
+    setOrderLog([products, "Total " + priceFormat(order.totalValue),order.paymantMethod.text])
   }
 
   useEffect(() => {
@@ -67,6 +67,7 @@ export default function Checkout() {
     }
   }, [orderLog]);
 
+  
 
   return (
     <Layout>
