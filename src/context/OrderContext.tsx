@@ -6,7 +6,8 @@ type OrderContextProps = {
   combo: [];
   dessert: [];
   beverage: [];
-  totalValue: number;
+  totaValue: number;
+  paymantMethod: [];
 };
 
 const OrderContext = createContext<OrderContextProps>({});
@@ -23,11 +24,15 @@ const OrderContextProvider = ({ children }: OrderContextProviderProps) => {
     dessert: [],
     beverage: [],
     totalValue: 0,
+    paymantMethod: [],
   };
 
   const [appettizerOrder, setAppettizerOrder] = useState([]);
   const [hamburgerOrder, setHamburgerOrder] = useState([]);
-  const [beveregeOrder, setBeveregeOrder] = useState([]);
+  const [beverageOrder, setBeverageOrder] = useState([]);
+  const [comboOrder, setComboOrder] = useState([]);
+  const [dessertOrder, setDessertOrder] = useState([]);
+  const [selectedPaymantOrder, setSelectedPaymantOrder] = useState([]);
   const [order, setOrder] = useState(inicialOrder);
 
   const sumValues = (arrayValues) => {
@@ -45,25 +50,29 @@ const OrderContextProvider = ({ children }: OrderContextProviderProps) => {
   useEffect(() => {
     const subTotalHamburgers = getPrices(hamburgerOrder);
     const subTotalAppetizer = getPrices(appettizerOrder);
-    const subTotalBeverege = getPrices(beveregeOrder);
+    const subTotalBeverage = getPrices(beverageOrder);
+    const subTotalCombo = getPrices(comboOrder);
+    const subtTotalDessert = getPrices(dessertOrder);
     const subtotal = subTotalHamburgers.concat(
       subTotalAppetizer,
-      subTotalBeverege
+      subTotalBeverage,
+      subTotalCombo,
+      subtTotalDessert
     );
 
     const internalOrder = {
       ...order,
       ["hamburger"]: hamburgerOrder,
       ["appettizer"]: appettizerOrder,
-      ["beverege"]: beveregeOrder,
+      ["beverage"]: beverageOrder,
+      ["combo"]: comboOrder,
+      ["dessert"]: dessertOrder,
       totalValue: sumValues(subtotal),
+      ["paymantMethod"]: selectedPaymantOrder,
     };
 
-    // console.log(subtotal);
-    // console.log(internalOrder);
-
     setOrder(internalOrder);
-  }, [hamburgerOrder, appettizerOrder, setOrder]);
+  }, [hamburgerOrder, appettizerOrder, beverageOrder, comboOrder, dessertOrder, selectedPaymantOrder, setOrder]);
 
   return (
     <OrderContext.Provider
@@ -72,8 +81,14 @@ const OrderContextProvider = ({ children }: OrderContextProviderProps) => {
         setAppettizerOrder,
         hamburgerOrder,
         setHamburgerOrder,
-        beveregeOrder,
-        setBeveregeOrder,
+        beverageOrder,
+        setBeverageOrder,
+        comboOrder,
+        setComboOrder,
+        dessertOrder,
+        setDessertOrder,
+        selectedPaymantOrder,
+        setSelectedPaymantOrder,
         order,
         setOrder,
       }}

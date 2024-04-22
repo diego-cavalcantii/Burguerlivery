@@ -7,6 +7,9 @@ const LazyHamburgers = lazy(() => import("./pages/Hamburgers/Hamburgers"));
 const LazyAppetizers = lazy(() => import("./pages/Appetizers/Appetizers"));
 const LazyLogin = lazy(() => import("./pages/Login/Login"));
 const LazyCheckout = lazy(() => import("./pages/Checkout/Checkout"));
+const LazyBeverages = lazy(() => import("./pages/Beverages/Beverages"));
+const LazyCombos = lazy(() => import("./pages/Combos/Combos"));
+const LazyDesserts = lazy(() => import("./pages/Desserts/Desserts"));
 
 export default function App() {
   return (
@@ -16,6 +19,9 @@ export default function App() {
           <Route path="/" element={<LazyHome />} />
           <Route path="/entradas" element={<LazyAppetizers />} />
           <Route path="/hamburgers" element={<LazyHamburgers />} />
+          <Route path="/bebidas" element={<LazyBeverages />} />
+          <Route path="/combos" element={<LazyCombos />} />
+          <Route path="/sobremesas" element={<LazyDesserts />} />
           <Route path="/login" element={<LazyLogin />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/checkout" element={<LazyCheckout />} />

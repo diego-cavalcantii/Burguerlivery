@@ -16,9 +16,14 @@ export const ShoppingCart = ({ isOpen, onClose }: ShoppingCartProps) => {
   const handleClick = () => {
     navigate("/checkout");
   };
-  const { hamburgerOrder, setHamburgerOrder, appettizerOrder, setAppettizerOrder, order, setOrder } = useContext(
-    OrderContext
-  );
+  const { hamburgerOrder, setHamburgerOrder,
+    appettizerOrder, setAppettizerOrder,
+    beverageOrder, setBeverageOrder,
+    comboOrder, setComboOrder,
+    dessertOrder, setDessertOrder,
+    order, setOrder } = useContext(
+      OrderContext
+    );
 
 
   return (
@@ -42,6 +47,36 @@ export const ShoppingCart = ({ isOpen, onClose }: ShoppingCartProps) => {
               {hamburger.name} {priceFormat(hamburger.value)}
             </p>
             <ButtonDeleteItem index={index} productOrder={hamburgerOrder} setProductOrder={setHamburgerOrder} />
+          </ItemShoppingCart>
+        ))}
+      </div>
+      <div>
+        {beverageOrder.map((beverage, index) => (
+          <ItemShoppingCart>
+            <p key={index}>
+              {beverage.name} {priceFormat(beverage.value)}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={beverageOrder} setProductOrder={setBeverageOrder} />
+          </ItemShoppingCart>
+        ))}
+      </div>
+      <div>
+        {comboOrder.map((combo, index) => (
+          <ItemShoppingCart>
+            <p key={index}>
+              {` Combo - ${combo.name} ${priceFormat(combo.value)}`}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={comboOrder} setProductOrder={setComboOrder} />
+          </ItemShoppingCart>
+        ))}
+      </div>
+      <div>
+        {dessertOrder.map((dessert, index) => (
+          <ItemShoppingCart>
+            <p key={index}>
+              {dessert.name} {priceFormat(dessert.value)}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={dessertOrder} setProductOrder={setDessertOrder} />
           </ItemShoppingCart>
         ))}
       </div>

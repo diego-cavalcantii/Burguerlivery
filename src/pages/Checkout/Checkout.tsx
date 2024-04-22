@@ -6,11 +6,16 @@ import { ButtonFinish, FinishPurchase, ItemCheckout, SelectElement, TotalElement
 
 
 export default function Checkout() {
-  const { hamburgerOrder, setHamburgerOrder, appettizerOrder, setAppettizerOrder, order, setOrder } = useContext(
-    OrderContext
-  );
+  const { hamburgerOrder, setHamburgerOrder,
+    appettizerOrder, setAppettizerOrder,
+    beverageOrder, setBeverageOrder,
+    comboOrder, setComboOrder,
+    dessertOrder, setDessertOrder,
+    selectedPaymantOrder, setSelectedPaymantOrder,
+    order, setOrder } = useContext(
+      OrderContext
+    );
   const [paymant, setPaymant] = useState([])
-  const [selectedPaymant, setSelectedPaymant] = useState("");
   const [orderLog, setOrderLog] = useState([])
 
   const getCheckout = async () => {
@@ -31,25 +36,37 @@ export default function Checkout() {
     };
   }, []);
 
+
+  const productsDetails = (order) => {
+    return order.map(product => ({ name: product.name, value: priceFormat(product.value) }))
+  }
+
+  const generateProducts = {
+    ["hamburger"]: productsDetails(hamburgerOrder),
+    ["appettizer"]: productsDetails(appettizerOrder),
+    ["combo"]: productsDetails(comboOrder),
+    ["dessert"]: productsDetails(dessertOrder),
+    ["beverage"]: productsDetails(beverageOrder),
+  }
+
+  useEffect(() => {
+    const selectedObject = paymant.find(product => product.id === selectedPaymantOrder);
+    if (selectedObject) {
+      setSelectedPaymantOrder(selectedObject)
+    }
+  }, [selectedPaymantOrder]);
+
+  const FinalizarCompra = () => {
+    const products = generateProducts;
+    setOrderLog([products, "Total " + priceFormat(order.totalValue), order.paymantMethod])
+  }
+
   useEffect(() => {
     if (orderLog.length > 0) {
       console.log(orderLog);
     }
   }, [orderLog]);
 
-
-  function FinalizarCompra(...productOrder) {
-    setOrderLog([...productOrder]);
-  }
-
-  // const productsDetails = (order) => {
-  //   return order.map(product => ({ name: product.name, value: priceFormat(product.value) }))
-  // }
-
-  // const products = {
-  //   ["hamburger"]: productsDetails(hamburgerOrder),
-  //   ["appettizer"]: productsDetails(appettizerOrder),
-  // }
 
   return (
     <Layout>
@@ -76,20 +93,50 @@ export default function Checkout() {
           </ItemCheckout>
         ))}
       </div>
+      <div>
+        {beverageOrder.map((beverage, index) => (
+          <ItemCheckout>
+            <p key={index}>
+              {beverage.name} {priceFormat(beverage.value)}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={beverageOrder} setProductOrder={setBeverageOrder} />
+          </ItemCheckout>
+        ))}
+      </div>
+      <div>
+        {comboOrder.map((combo, index) => (
+          <ItemCheckout>
+            <p key={index}>
+              {combo.name} {priceFormat(combo.value)}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={comboOrder} setProductOrder={setComboOrder} />
+          </ItemCheckout>
+        ))}
+      </div>
+      <div>
+        {dessertOrder.map((dessert, index) => (
+          <ItemCheckout>
+            <p key={index}>
+              {dessert.name} {priceFormat(dessert.value)}
+            </p>
+            <ButtonDeleteItem index={index} productOrder={dessertOrder} setProductOrder={setDessertOrder} />
+          </ItemCheckout>
+        ))}
+      </div>
       <TotalElement>
         <p>Total: {priceFormat(order.totalValue)}</p>
       </TotalElement>
       <PaymantOptionElement>
         <label htmlFor="paymant">Forma de Pagamento</label>
-        <SelectElement id="paymant" onChange={(e) => setSelectedPaymant(e.target.value)}>
+        <SelectElement id="paymant" onChange={(e) => setSelectedPaymantOrder(e.target.value)}>
           <option disabled selected hidden>Escolha uma opção</option>
           {paymant.map(({ id, text }) => (
-            <option value={text} key={id}>{text}</option>
+            <option value={id} key={id}>{text}</option>
           ))}
         </SelectElement>
       </PaymantOptionElement>
       <FinishPurchase>
-        <ButtonFinish onClick={() => FinalizarCompra(order, priceFormat(order.totalValue), selectedPaymant)}>Finalizar Compra</ButtonFinish>
+        <ButtonFinish onClick={() => FinalizarCompra()}>Finalizar Compra</ButtonFinish>
       </FinishPurchase>
     </Layout >
   )
