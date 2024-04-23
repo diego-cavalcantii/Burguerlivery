@@ -65,7 +65,7 @@ export const ShoppingCart = ({ isOpen, onClose }: ShoppingCartProps) => {
         {comboOrder.map((combo, index) => (
           <ItemShoppingCart>
             <p key={index}>
-              {` Combo - ${combo.name} ${priceFormat(combo.value)}`}
+              {`COMBO ${combo.name} ${priceFormat(combo.value)}`}
             </p>
             <ButtonDeleteItem index={index} productOrder={comboOrder} setProductOrder={setComboOrder} />
           </ItemShoppingCart>

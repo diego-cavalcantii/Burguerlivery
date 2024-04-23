@@ -108,7 +108,7 @@ export default function Checkout() {
         {comboOrder.map((combo, index) => (
           <ItemCheckout>
             <p key={index}>
-              {combo.name} {priceFormat(combo.value)}
+              {`COMBO ${combo.name} ${priceFormat(combo.value)}`}
             </p>
             <ButtonDeleteItem index={index} productOrder={comboOrder} setProductOrder={setComboOrder} />
           </ItemCheckout>
