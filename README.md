@@ -1,6 +1,6 @@
-# Burguer Delivery 🍔
+# Burguerlivery 🍔
 
-Bem-vindo ao Burguer Delivery! Este é um site onde você pode fazer pedidos de hambúrgueres deliciosos, bebidas refrescantes, sobremesas doces e entradinhas saborosas. O projeto foi desenvolvido utilizando React e TypeScript para proporcionar uma experiência de usuário agradável e intuitiva.
+Bem-vindo ao Burguerlivery! Este é um site onde você pode fazer pedidos de hambúrgueres deliciosos, bebidas refrescantes, sobremesas doces e entradinhas saborosas. O projeto foi desenvolvido utilizando React e TypeScript para proporcionar uma experiência de usuário agradável e intuitiva.
 
 ## 🚀 Funcionalidades
 
