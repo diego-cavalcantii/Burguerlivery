@@ -16,7 +16,7 @@ export default function Beverages() {
   const [products, setProducts] = useState([]);
 
   const getCategories = async () => {
-    const url = "http://localhost:8000/categories";
+    const url = "https://burgerlivery-api.vercel.app/categories";
     setIsLoading(true);
 
     try {
@@ -32,7 +32,7 @@ export default function Beverages() {
   };
 
   const getBeverages = async () => {
-    const url = "http://localhost:8000/beverages";
+    const url = "https://burgerlivery-api.vercel.app/beverages";
     setIsLoading(true);
 
     try {

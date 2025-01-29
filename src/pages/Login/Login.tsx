@@ -25,7 +25,7 @@ export default function Login() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const url = "http://localhost:8000/user/login";
+    const url = "https://burgerlivery-api.vercel.app/user/login";
 
     const payload = {
       login: email,

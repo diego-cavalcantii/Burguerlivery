@@ -18,7 +18,7 @@ export default function Appetizers() {
   const [nameSize, setNameSize] = useState("");
 
   const getCategories = async () => {
-    const url = "http://localhost:8000/categories";
+    const url = "https://burgerlivery-api.vercel.app/categories";
     setIsLoading(true);
 
     try {
@@ -34,7 +34,7 @@ export default function Appetizers() {
   };
 
   const getAppetizers = async () => {
-    const url = "http://localhost:8000/appetizers";
+    const url = "https://burgerlivery-api.vercel.app/appetizers";
     setIsLoading(true);
 
     try {

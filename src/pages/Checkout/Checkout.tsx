@@ -19,7 +19,7 @@ export default function Checkout() {
   const [orderLog, setOrderLog] = useState([])
 
   const getCheckout = async () => {
-    const url = "http://localhost:8000/payment/options";
+    const url = "https://burgerlivery-api.vercel.app/payment/options";
 
     const response = await fetch(url);
     const data = await response.json();
